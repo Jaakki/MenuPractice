@@ -1,4 +1,7 @@
 ﻿using System;
+using TestDataGeneratorLibrary;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MenuPractice
 {
@@ -14,11 +17,15 @@ namespace MenuPractice
         }
         private static bool MainMenu()
         {
+            TestDataGenerator tdg = new TestDataGenerator();
+            List<Person> people = new List<Person>();
             Console.Clear();
             Console.WriteLine("Choose an option:");
             Console.WriteLine("1) Reverse String");
             Console.WriteLine("2) Remove Whitespace");
-            Console.WriteLine("3) Exit");
+            Console.WriteLine("3) Generate random people");
+            Console.WriteLine("4) Roll a d6");
+            Console.WriteLine("5) Exit");
             Console.Write("\r\nSelect an option: ");
 
             switch (Console.ReadLine())
@@ -30,6 +37,20 @@ namespace MenuPractice
                     Whitespace();
                     return true;
                 case "3":
+                    Console.Clear();
+                    tdg.GetListOfRandomPersons(people, 10);
+                    tdg.PrintPeople(people);
+                    Console.WriteLine("\r\nPress enter to return to Main Menu");
+                    Console.ReadLine();
+                    return true;
+                case "4":
+                    Console.Clear();
+                    int dice = tdg.RandomInt(1, 7);
+                    Console.WriteLine($"You rolled: {dice}");
+                    Console.WriteLine("\r\nPress enter to return to Main Menu");
+                    Console.ReadLine();
+                    return true;
+                case "5":
                     return false;
                 default:
                     return true;
